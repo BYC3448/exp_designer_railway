@@ -1,0 +1,24 @@
+<div class="experiment-container">
+    <div class="result-container" id="experimentResult">
+        <!-- 실험 설계 결과가 여기에 표시됩니다 -->
+        <div class="placeholder-message">
+            <h3>🧪 실험을 설계해보세요</h3>
+            <p>교육과정을 선택하고 실험 정보를 입력한 후 '실험 설계하기' 버튼을 눌러주세요.</p>
+        </div>
+    </div>
+    
+    <div class="result-actions" id="experimentActions" style="display: none;">
+        <button id="revisionBtn" class="secondary-btn">설계안 수정 요청</button>
+        <button id="exportExperimentBtn" class="secondary-btn">Word로 다운로드</button>
+    </div>
+</div>
+
+<!-- 수정 요청 모달 -->
+<div id="revisionModal" class="modal">
+    <div class="modal-content">
+        <span class="close-btn">&times;</span>
+        <h2>설계안 수정 요청</h2>
+        <textarea id="revisionRequest" placeholder="어떤 부분을 수정하고 싶으신가요?"></textarea>
+        <button id="submitRevisionBtn" class="primary-btn">수정 요청하기</button>
+    </div>
+</div> 

@@ -1,0 +1,25 @@
+<div class="template-container">
+    <div class="result-container" id="templateResult">
+        <!-- 학생용 템플릿 결과가 여기에 표시됩니다 -->
+        <div class="placeholder-message">
+            <h3>📝 학생용 템플릿을 생성해보세요</h3>
+            <p>실험 설계가 완료되면 자동으로 학생용 보고서 템플릿이 생성됩니다.</p>
+        </div>
+    </div>
+    
+    <div class="result-actions" id="templateActions" style="display: none;">
+        <button id="templateRevisionBtn" class="secondary-btn">템플릿 수정 요청</button>
+        <button id="exportTemplateBtn" class="secondary-btn">Word로 다운로드</button>
+    </div>
+</div>
+
+<!-- 템플릿 수정 요청 모달 -->
+<div id="templateRevisionModal" class="modal">
+    <div class="modal-content">
+        <span class="close-btn">&times;</span>
+        <h2>템플릿 수정 요청</h2>
+        <p class="modal-description">실험 내용은 변경하지 않고, 템플릿 형식만 수정합니다.</p>
+        <textarea id="templateRevisionRequest" placeholder="어떤 부분을 수정하고 싶으신가요?&#10;예) 표의 행을 5개에서 7개로 늘려주세요&#10;예) 그래프 영역을 더 크게 만들어주세요&#10;예) 결론 부분에 추가 질문을 넣어주세요"></textarea>
+        <button id="submitTemplateRevisionBtn" class="primary-btn">수정 요청하기</button>
+    </div>
+</div> 

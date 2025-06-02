@@ -1,0 +1,705 @@
+/* 기본 스타일 리셋 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Noto Sans KR', sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f5f7fa;
+    padding-bottom: 2rem;
+}
+
+/* 헤더 스타일 */
+header {
+    background-color: #4a6fa5;
+    color: white;
+    padding: 2rem 0;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2rem;
+}
+
+header h1 {
+    font-size: 2.2rem;
+    margin-bottom: 0.5rem;
+}
+
+header p {
+    font-size: 1.1rem;
+    opacity: 0.9;
+}
+
+/* 메인 콘텐츠 레이아웃 */
+main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+/* 입력 섹션 스타일 */
+.input-section {
+    background-color: white;
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    margin-bottom: 2rem;
+}
+
+.input-section h2 {
+    color: #4a6fa5;
+    margin-bottom: 1.2rem;
+    font-size: 1.5rem;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 0.5rem;
+}
+
+/* 폼 스타일 */
+.form-group {
+    margin-bottom: 1.2rem;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: #555;
+}
+
+select,
+input[type="text"],
+textarea {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-family: inherit;
+    font-size: 1rem;
+}
+
+textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+.file-info {
+    margin-top: 0.3rem;
+    font-size: 0.85rem;
+    color: #6c7b95;
+}
+
+.form-actions {
+    margin-top: 1.5rem;
+    text-align: center;
+}
+
+/* 내용 요소 컨테이너 */
+.content-elements-container {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 1rem;
+    min-height: 100px;
+}
+
+.content-element {
+    display: inline-block;
+    background-color: #e3f2fd;
+    color: #1976d2;
+    padding: 0.5rem 1rem;
+    margin: 0.25rem;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.2s;
+    border: 1px solid #bbdefb;
+    font-size: 0.9rem;
+    user-select: none;
+}
+
+.content-element:hover {
+    background-color: #bbdefb;
+    border-color: #1976d2;
+}
+
+.content-element.selected {
+    background-color: #1976d2;
+    color: white;
+    border-color: #1976d2;
+    font-weight: 500;
+    box-shadow: 0 2px 4px rgba(25, 118, 210, 0.3);
+}
+
+/* 선택된 내용 요소 컨테이너 */
+.selected-elements-container {
+    margin-top: 1rem;
+    padding: 1rem;
+    background-color: #f8f9fa;
+    border-radius: 4px;
+    border: 1px solid #dee2e6;
+}
+
+.selected-elements-container label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #495057;
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
+#selectedElementsDisplay {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    min-height: 2rem;
+}
+
+.selected-element-tag {
+    display: inline-flex;
+    align-items: center;
+    background-color: #1976d2;
+    color: white;
+    padding: 0.3rem 0.8rem;
+    border-radius: 15px;
+    font-size: 0.85rem;
+    border: 1px solid #1976d2;
+    gap: 0.5rem;
+    font-weight: 500;
+    box-shadow: 0 2px 4px rgba(25, 118, 210, 0.3);
+}
+
+.selected-element-tag .remove-btn {
+    cursor: pointer;
+    color: white;
+    font-weight: bold;
+    font-size: 1.2rem;
+    opacity: 0.8;
+    transition: opacity 0.2s;
+}
+
+.selected-element-tag .remove-btn:hover {
+    opacity: 1;
+}
+
+/* 입력 필드 예시 텍스트 */
+.placeholder-example {
+    font-size: 0.85rem;
+    color: #6c757d;
+    margin-left: 0.5rem;
+    font-weight: normal;
+}
+
+/* placeholder 텍스트 스타일 */
+input::placeholder,
+textarea::placeholder {
+    font-size: 0.85rem;
+    font-style: italic;
+    color: #888;
+    opacity: 0.8;
+}
+
+input::-webkit-input-placeholder,
+textarea::-webkit-input-placeholder {
+    font-size: 0.85rem;
+    font-style: italic;
+    color: #888;
+    opacity: 0.8;
+}
+
+input::-moz-placeholder,
+textarea::-moz-placeholder {
+    font-size: 0.85rem;
+    font-style: italic;
+    color: #888;
+    opacity: 0.8;
+}
+
+input:-ms-input-placeholder,
+textarea:-ms-input-placeholder {
+    font-size: 0.85rem;
+    font-style: italic;
+    color: #888;
+    opacity: 0.8;
+}
+
+/* 버튼 스타일 */
+.primary-btn {
+    background-color: #4a6fa5;
+    color: white;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.primary-btn:hover {
+    background-color: #3d5d8a;
+}
+
+.secondary-btn {
+    background-color: #e8f0fe;
+    color: #4a6fa5;
+    border: 1px solid #4a6fa5;
+    padding: 0.7rem 1.2rem;
+    border-radius: 4px;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-right: 0.5rem;
+}
+
+.secondary-btn:hover {
+    background-color: #d1e1fd;
+}
+
+/* 결과 섹션 스타일 */
+.output-section {
+    margin-top: 2rem;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+}
+
+.tab-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.tabs {
+    display: flex;
+    background-color: #f5f7fa;
+    border-bottom: 1px solid #eee;
+}
+
+.tab-btn {
+    padding: 1rem 1.5rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    color: #777;
+    transition: all 0.2s;
+    white-space: nowrap;
+}
+
+.tab-btn.active {
+    color: #4a6fa5;
+    border-bottom: 2px solid #4a6fa5;
+    font-weight: 500;
+}
+
+.tab-content {
+    display: none;
+    padding: 1.5rem;
+}
+
+.tab-content.active {
+    display: block !important;
+}
+
+/* 결과 컨테이너 스타일 */
+.result-container {
+    margin-bottom: 1.5rem;
+}
+
+.result-container > *:first-child {
+    margin-top: 0;
+}
+
+.result-container > *:last-child {
+    margin-bottom: 0;
+}
+
+.result-container p {
+    margin-bottom: 1rem;
+}
+
+.result-container h1 {
+    color: #4a6fa5;
+    font-size: 2rem;
+    font-weight: bold;
+    text-align: center;
+    margin: 0 0 1.5rem 0;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #4a6fa5;
+}
+
+.result-container h2 {
+    color: #4a6fa5;
+    font-size: 1.3rem;
+    margin: 1.5rem 0 1rem;
+}
+
+.result-container h2:first-child {
+    margin-top: 0;
+}
+
+.result-container ul, 
+.result-container ol {
+    margin-bottom: 1rem;
+    padding-left: 1.5rem;
+}
+
+.result-container table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1rem;
+    background-color: white;
+}
+
+.result-container th,
+.result-container td {
+    padding: 0.8rem;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+.result-container th {
+    background-color: #f5f7fa;
+    font-weight: 500;
+    color: #4a6fa5;
+}
+
+.result-container p {
+    line-height: 1.6;
+    color: #444;
+}
+
+.result-container p strong {
+    color: #333;
+    font-weight: 500;
+}
+
+.result-container h2 + table {
+    margin-top: 0.5rem;
+}
+
+.result-container table + p {
+    margin-top: 1.5rem;
+}
+
+.result-actions {
+    margin-top: 1.5rem;
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.5rem;
+}
+
+/* 로딩 오버레이 */
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.9);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.loading-content {
+    text-align: center;
+}
+
+.loading-spinner {
+    width: 50px;
+    height: 50px;
+    border: 3px solid #f3f3f3;
+    border-top: 3px solid #4a6fa5;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 1rem;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* 모달 스타일 */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
+
+.modal-content {
+    position: relative;
+    background-color: white;
+    margin: 10% auto;
+    padding: 2rem;
+    width: 90%;
+    max-width: 600px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.close-btn {
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+    font-size: 1.5rem;
+    color: #999;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 0;
+}
+
+.modal textarea {
+    width: 100%;
+    min-height: 150px;
+    margin: 1rem 0;
+    padding: 0.8rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+/* 푸터 스타일 */
+footer {
+    text-align: center;
+    padding: 2rem 0;
+    color: #777;
+    font-size: 0.9rem;
+    margin-top: 3rem;
+    border-top: 1px solid #eee;
+}
+
+/* 반응형 스타일 */
+@media (max-width: 768px) {
+    header {
+        padding: 1.5rem 0;
+    }
+
+    header h1 {
+        font-size: 1.8rem;
+    }
+
+    .form-actions {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .primary-btn, 
+    .secondary-btn {
+        width: 100%;
+    }
+
+    .tab-btn {
+        padding: 0.8rem 1rem;
+    }
+}
+
+/* 파일 업로드 영역 스타일 */
+.form-group .file-upload-area {
+    border: 2px dashed #bbdefb;
+    border-radius: 4px;
+    padding: 2rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s;
+    position: relative;
+    background-color: #f8fbff;
+}
+
+.form-group .file-upload-area:hover {
+    border-color: #4a6fa5;
+    background-color: #f0f7ff;
+}
+
+.form-group .file-upload-area.drag-over {
+    border-color: #1976d2;
+    background-color: #e8f4fd;
+}
+
+/* 파일 상태별 스타일 */
+.file-upload-area.file-loading {
+    border-color: #2196f3;
+    background-color: #e3f2fd;
+}
+
+.file-upload-area.file-selected {
+    border-color: #1976d2;
+    background-color: #e8f4fd;
+}
+
+.file-upload-area.file-error {
+    border-color: #f44336;
+    background-color: #ffebee;
+}
+
+.file-upload-area input[type="file"] {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.file-drop-label {
+    color: #5c7cfa;
+    font-size: 0.95rem;
+    margin-top: 0.5rem;
+    display: block;
+    line-height: 1.5;
+}
+
+.file-upload-area .upload-icon {
+    font-size: 2.5rem;
+    color: #4a6fa5;
+    margin-bottom: 0.5rem;
+    transition: all 0.3s;
+}
+
+/* 선택된 파일 스타일 */
+.file-upload-area.file-selected .upload-icon {
+    color: #1976d2;
+}
+
+.file-upload-area.file-error .upload-icon {
+    color: #f44336;
+}
+
+.file-upload-area.file-loading .upload-icon {
+    color: #2196f3;
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1; }
+}
+
+/* 디버그 정보 스타일 */
+.debug-info {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    padding: 1rem;
+    font-family: monospace;
+    font-size: 0.8rem;
+    max-width: 50%;
+    max-height: 50%;
+    overflow: auto;
+    z-index: 9999;
+    display: none;
+    border-top-left-radius: 8px;
+}
+
+.debug-info.show {
+    display: block;
+}
+
+/* 스크롤바 스타일 */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+/* 선택사항 표시 스타일 */
+.optional-field {
+    font-size: 0.8rem;
+    color: #6c757d;
+    font-weight: normal;
+    font-style: italic;
+}
+
+/* 참고자료 영역의 선택사항 스타일 (별도 줄 표시) */
+.form-group > .optional-field {
+    display: block;
+    margin-top: 0.3rem;
+}
+
+/* 내용 요소 placeholder 텍스트 스타일 */
+.placeholder-text {
+    font-size: 0.95rem;
+    color: #6c757d;
+    margin: 0;
+    opacity: 0.8;
+}
+
+/* 그래프 영역 스타일 */
+.graph-container {
+    margin: 1.5rem 0;
+    text-align: center;
+}
+
+.graph-title {
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    color: #4a6fa5;
+}
+
+.graph-area {
+    display: inline-block;
+    margin: 1rem 0;
+    background-color: #fafafa;
+    border-radius: 4px;
+    padding: 1rem;
+}
+
+.graph-area svg {
+    background-color: white;
+    border-radius: 2px;
+}
+
+.graph-area img {
+    display: block;
+    margin: 0 auto;
+    background-color: white;
+    border-radius: 2px;
+}
+
+.graph-instruction {
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+    color: #666;
+    font-style: italic;
+}
+
+/* 표 컨테이너 스타일 개선 */
+.table-container {
+    margin: 1.5rem 0;
+}
+
+.table-notice {
+    font-size: 0.8rem;
+    color: #666;
+    margin-bottom: 0.5rem;
+    font-style: italic;
+}
+
+.table-title {
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    color: #4a6fa5;
+}

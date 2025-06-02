@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>과학 실험 설계 도우미</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mammoth@1.6.0/mammoth.browser.min.js"></script>
+</head>
+<body>
+    <header>
+        <h1>과학 실험 설계 도우미</h1>
+        <p>AI를 활용한 맞춤형 실험 설계 및 학생용 보고서 템플릿 생성</p>
+    </header>
+
+    <main>
+        <section class="input-section">
+            <h2>교육과정 정보</h2>
+            <form id="experimentForm">
+                <div class="form-group">
+                    <label for="schoolLevel">학교급</label>
+                    <select id="schoolLevel" required>
+                        <option value="" disabled selected>학교급 선택</option>
+                        <!-- 여기에 학교급들이 동적으로 추가됩니다 -->
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="gradeGroup">학년군</label>
+                    <select id="gradeGroup" required disabled>
+                        <option value="" disabled selected>학년군 선택</option>
+                        <!-- 동적으로 채워집니다 -->
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="subject">과목</label>
+                    <select id="subject" required disabled>
+                        <option value="" disabled selected>과목 선택</option>
+                        <!-- 동적으로 채워집니다 -->
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="unit">단원</label>
+                    <select id="unit" required disabled>
+                        <option value="" disabled selected>단원 선택</option>
+                        <!-- 동적으로 채워집니다 -->
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="contentElements">내용 요소</label>
+                    <div id="contentElements" class="content-elements-container">
+                        <!-- 동적으로 채워집니다 -->
+                        <p class="placeholder-text">단원을 선택하면 내용 요소가 표시됩니다.</p>
+                    </div>
+                    <div id="selectedElements" class="selected-elements-container" style="display: none;">
+                        <label>선택된 내용 요소:</label>
+                        <div id="selectedElementsDisplay"></div>
+                    </div>
+                </div>
+
+                <h2>실험 정보</h2>
+                <div class="form-group">
+                    <label for="experimentTopic">실험 주제 <span class="optional-field"></span> <span class="placeholder-example"> 어떤 주제의 실험을 하고자 하시나요? 예) 패러데이 법칙, 수평으로 던진 물체의 운동, 소리의 높낮이</span></label>
+                    <input type="text" id="experimentTopic" placeholder="(선택사항: 비워두면 자동 설정됩니다)">
+                </div>
+
+                <div class="form-group">
+                    <label for="teacherIntent">수업 의도 <span class="optional-field"></span> <span class="placeholder-example"> 어떤 방향의 수업을 하고자 하시나요? 예) 일상생활에 적용되는 사례 중심, 개념 확인, 탐구 방법 체득  </span></label>
+                    <textarea id="teacherIntent" placeholder="(선택사항: 비워두면 자동 설정됩니다)"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="referenceFile">참고 자료</label>
+                    <div class="file-upload-area">
+                        <input type="file" id="referenceFile" accept=".pdf,.docx,.txt,.md">
+                        <div class="upload-icon">📁</div>
+                        <span class="file-drop-label">클릭하거나 파일을 드래그하여 업로드</span>
+                        <div class="placeholder-example" style="margin-top: 0.5rem; font-size: 0.85rem;">지원 형식: PDF, Word, 텍스트, Markdown</div>
+                    </div>
+                    <span class="optional-field">(선택사항: 비워두면 자동 설정됩니다)</span>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" id="generateBtn" class="primary-btn">실험 설계하기</button>
+                </div>
+            </form>
+        </section>
+
+        <section class="output-section" id="outputSection" style="display: none;">
+            <div class="tab-container">
+                <div class="tabs">
+                    <button class="tab-btn active" data-tab="experiment">실험 설계안</button>
+                    <button class="tab-btn" data-tab="template">학생용 템플릿</button>
+                    <button class="tab-btn" data-tab="video">추천 동영상</button>
+                </div>
+
+                <!-- 탭 내용이 동적으로 로드되는 영역 -->
+                <div id="tab-content" class="tab-content active">
+                    <!-- 탭별 HTML이 여기에 로드됩니다 -->
+                </div>
+            </div>
+        </section>
+
+        <!-- 로딩 오버레이 -->
+        <div id="loadingOverlay" class="loading-overlay">
+            <div class="loading-content">
+                <div class="loading-spinner"></div>
+                <p id="loadingMessage">실험을 설계하는 중입니다...</p>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>© 2025 과학 실험 설계 도우미 | AI융합교육 최보윤 </p>
+    </footer>
+
+    <!-- 새로운 모듈 기반 앱 로드 -->
+    <script type="module" src="main.js"></script>
+</body>
+</html> 
