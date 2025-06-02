@@ -8,6 +8,30 @@
   ],
   "routes": [
     {
+      "src": "/css/(.*)",
+      "dest": "/$1"
+    },
+    {
+      "src": "/shared/(.*)",
+      "dest": "/$1"
+    },
+    {
+      "src": "/experiment/(.*)",
+      "dest": "/$1"
+    },
+    {
+      "src": "/template/(.*)",
+      "dest": "/$1"
+    },
+    {
+      "src": "/video/(.*)",
+      "dest": "/$1"
+    },
+    {
+      "src": "/main.js",
+      "dest": "/main.js"
+    },
+    {
       "src": "/api/(.*)",
       "dest": "/server.js"
     },

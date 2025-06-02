@@ -9,8 +9,17 @@ app.use(cors());
 app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ limit: '50mb', extended: true }));
 
-// 정적 파일 제공 설정
-app.use(express.static('.'));
+// 정적 파일 제공 설정 - 올바른 MIME 타입 설정
+app.use(express.static(path.join(__dirname), {
+    setHeaders: (res, path, stat) => {
+        if (path.endsWith('.css')) {
+            res.set('Content-Type', 'text/css');
+        }
+        if (path.endsWith('.js')) {
+            res.set('Content-Type', 'application/javascript');
+        }
+    }
+}));
 
 // 루트 경로에서 index.html 제공
 app.get('/', (req, res) => {
