@@ -1,31 +1,11 @@
-require('dotenv').config();
+const serverless = require('serverless-http');
 const express = require('express');
 const cors = require('cors');
 const fetch = require('node-fetch');
-const path = require('path');
 
 const app = express();
 app.use(cors());
 app.use(express.json({ limit: '50mb' }));
-app.use(express.urlencoded({ limit: '50mb', extended: true }));
-
-// 정적 파일 제공 설정
-app.use(express.static(__dirname, {
-    dotfiles: 'ignore',
-    etag: false,
-    extensions: ['htm', 'html', 'css', 'js'],
-    index: false,
-    maxAge: '1d',
-    redirect: false,
-    setHeaders: function (res, path, stat) {
-        res.set('x-timestamp', Date.now())
-    }
-}));
-
-// 루트 경로에서 index.html 제공
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'index.html'));
-});
 
 // Gemini API 엔드포인트
 app.post('/api/gemini/generate', async (req, res) => {
@@ -37,7 +17,6 @@ app.post('/api/gemini/generate', async (req, res) => {
             throw new Error('Gemini API 키가 설정되지 않았습니다.');
         }
 
-        // 마지막 사용자 메시지 가져오기
         const lastUserMessage = messages.filter(msg => msg.role === 'user').pop();
         
         const requestBody = {
@@ -93,7 +72,7 @@ app.post('/api/gemini/generate', async (req, res) => {
     }
 });
 
-// YouTube 검색 API 엔드포인트
+// YouTube 검색 API 엔드포인트  
 app.post('/api/youtube/search', async (req, res) => {
     try {
         const { query, pageToken, maxResults = 12 } = req.body;
@@ -103,28 +82,22 @@ app.post('/api/youtube/search', async (req, res) => {
             throw new Error('YouTube API 키가 설정되지 않았습니다.');
         }
 
-        // pageToken이 있으면 추가
         const pageTokenParam = pageToken ? `&pageToken=${pageToken}` : '';
         const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${encodeURIComponent(query)}&type=video&maxResults=${maxResults}${pageTokenParam}&key=${apiKey}`;
         
-        console.log('YouTube API 요청:', url); // 디버깅용 로그
-
         const response = await fetch(url);
 
         if (!response.ok) {
             const errorText = await response.text();
-            console.error('YouTube API 오류 응답:', errorText);
             throw new Error(`YouTube API 요청 실패: ${errorText}`);
         }
 
         const data = await response.json();
-        console.log('YouTube API 응답:', JSON.stringify(data, null, 2)); // 디버깅용 로그
         
         if (!data.items || !Array.isArray(data.items)) {
             throw new Error('YouTube API 응답 형식이 올바르지 않습니다.');
         }
 
-        // 원본 데이터 구조 유지 (video.js에서 사용)
         res.json(data);
     } catch (error) {
         console.error('YouTube 검색 중 오류:', error);
@@ -148,19 +121,14 @@ app.post('/api/youtube/details', async (req, res) => {
 
         const url = `https://www.googleapis.com/youtube/v3/videos?part=contentDetails,statistics&id=${videoId}&key=${apiKey}`;
         
-        console.log('YouTube 상세정보 API 요청:', url); // 디버깅용 로그
-
         const response = await fetch(url);
 
         if (!response.ok) {
             const errorText = await response.text();
-            console.error('YouTube 상세정보 API 오류 응답:', errorText);
             throw new Error(`YouTube 상세정보 API 요청 실패: ${errorText}`);
         }
 
         const data = await response.json();
-        console.log('YouTube 상세정보 API 응답:', JSON.stringify(data, null, 2)); // 디버깅용 로그
-        
         res.json(data);
     } catch (error) {
         console.error('YouTube 상세정보 조회 중 오류:', error);
@@ -168,7 +136,4 @@ app.post('/api/youtube/details', async (req, res) => {
     }
 });
 
-const PORT = process.env.PORT || 8000;
-app.listen(PORT, () => {
-    console.log(`서버가 포트 ${PORT}에서 실행 중입니다.`);
-}); 
+module.exports.handler = serverless(app); 
