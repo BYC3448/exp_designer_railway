@@ -12,9 +12,9 @@ app.use(express.urlencoded({ limit: '50mb', extended: true }));
 // 정적 파일 제공 설정
 app.use(express.static('.'));
 
-// 루트 경로에서 index-new.html로 리다이렉트
+// 루트 경로에서 index.html 제공
 app.get('/', (req, res) => {
-    res.redirect('/index-new.html');
+    res.sendFile(path.join(__dirname, 'index.html'));
 });
 
 // Gemini API 엔드포인트
