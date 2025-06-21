@@ -76,7 +76,19 @@ AI를 활용한 맞춤형 과학 실험 설계 및 학생용 보고서 템플릿
 
 ## 📸 스크린샷
 
-https://github.com/BYC3448/exp_designer_railway/issues/1
+![메인화면-교육과정](https://github.com/user-attachments/assets/1b43a825-4d8c-4c14-a4e2-ee9cb67f06c9)
+
+![메인화면-교사의 수업의도](https://github.com/user-attachments/assets/229ddda3-1fc0-4e98-8970-58557e7d8705)
+
+![실험설계안 예시](https://github.com/user-attachments/assets/4d00ad70-948f-4138-89ad-006f0e07f3e9)
+
+![학생용 보고서 템플릿 예시1](https://github.com/user-attachments/assets/a54edbbc-09a7-4611-88fc-dc9a78ac5ec5)
+
+![학생용 보고서 템플릿 예시2](https://github.com/user-attachments/assets/271c4ac1-53a4-4846-8890-b1c74fbbba57)
+
+![학생용 보고서 템플릿 예시3](https://github.com/user-attachments/assets/b8068a4e-3ae0-4dfb-bac2-95a9cb30e9a0)
+
+![추천 실험 영상](https://github.com/user-attachments/assets/75f3e78c-2b36-4c21-bb30-bd2c051a719d)
 
 
 
