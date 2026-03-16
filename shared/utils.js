@@ -85,7 +85,7 @@ export function markdownToHtml(markdown) {
         content = content.replace(/(<\/div>)\n+/g, '$1');
         
         // 4. 일반 텍스트의 줄바꿈만 <br>로 변환
-        content = content.replace(/\n(?![<\s])/g, '<br>');
+        //content = content.replace(/\n(?![<\s])/g, '<br>');
         
         // 5. 연속된 <br> 정리 (최대 2개까지만)
         content = content.replace(/(<br>\s*){3,}/g, '<br><br>');
