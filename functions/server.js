@@ -57,7 +57,10 @@ app.post('/api/gemini/generate', async (req, res) => {
         if (data.candidates && data.candidates.length > 0) {
             const candidate = data.candidates[0];
             if (candidate.content && candidate.content.parts && candidate.content.parts.length > 0) {
-                result = candidate.content.parts[0].text || '';
+                // parts가 여러 개로 나뉘어 오는 경우가 있어 모두 합침
+                result = candidate.content.parts
+                    .map((p) => (typeof p?.text === 'string' ? p.text : ''))
+                    .join('');
             }
         }
 
