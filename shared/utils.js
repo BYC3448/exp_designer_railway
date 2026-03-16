@@ -53,6 +53,21 @@ export function formatPrerequisiteContent(prerequisites) {
 // 마크다운을 HTML로 변환하는 함수
 export function markdownToHtml(markdown) {
     if (!markdown) return '';
+
+    // Gemini 2.5 등에서 HTML이 엔티티로 이스케이프되어 오는 경우(그래프/표가 깨짐) 복구
+    // 예: &lt;div class="graph-container"&gt; ... &lt;/div&gt;
+    if (markdown.includes('&lt;') && markdown.includes('&gt;')) {
+        markdown = markdown
+            .replace(/&lt;/g, '<')
+            .replace(/&gt;/g, '>')
+            .replace(/&quot;/g, '"')
+            .replace(/&#39;/g, "'")
+            .replace(/&amp;/g, '&');
+    }
+
+    // 그래프 영역이 누락되면 기본 그래프(빈 좌표평면)를 자동 삽입
+    // - 모델이 <div class="graph-container"> 블록을 생략/변형해도 UI가 안정적으로 보이도록 함
+    markdown = ensureDefaultGraphSection(markdown);
     
     // HTML 태그가 이미 포함되어 있으면 그대로 반환
     if (markdown.includes('<') && markdown.includes('>')) {
@@ -109,6 +124,63 @@ export function markdownToHtml(markdown) {
         .replace(/^\* (.*$)/gim, '<li>$1</li>')
         .replace(/\*\*(.*)\*\*/gim, '<strong>$1</strong>')
         .replace(/\n/gim, '<br>');
+}
+
+function ensureDefaultGraphSection(markdown) {
+    // 그래프 컨테이너가 이미 있으면 그대로 둠
+    if (markdown.includes('class="graph-container"') || markdown.includes("class='graph-container'")) {
+        return markdown;
+    }
+
+    // "## 데이터 그래프" 섹션이 없으면 삽입하지 않음(실험 설계안 등 다른 출력에 영향 최소화)
+    const headerRegex = /^##\s*데이터\s*그래프\s*$/gim;
+    if (!headerRegex.test(markdown)) return markdown;
+
+    // heading 바로 아래에 그래프 HTML을 삽입
+    const defaultGraphHtml = `
+<div class="graph-container">
+  <div class="graph-title">(그래프 1) 실험 결과 그래프</div>
+  <div class="graph-area">
+    <svg width="500" height="375" viewBox="0 0 600 450" xmlns="http://www.w3.org/2000/svg" aria-label="좌표평면 그래프" role="img" style="width: 500px; height: 375px; border: 1px solid #ccc; display: block; margin: 10px auto;">
+      <rect width="100%" height="100%" fill="white" stroke="#333" stroke-width="2"/>
+      <defs>
+        <pattern id="grid" width="30" height="30" patternUnits="userSpaceOnUse">
+          <path d="M 30 0 L 0 0 0 30" fill="none" stroke="#eee" stroke-width="1"/>
+        </pattern>
+      </defs>
+      <rect width="100%" height="100%" fill="url(#grid)"/>
+      <line x1="60" y1="390" x2="570" y2="390" stroke="#000" stroke-width="3"/>
+      <line x1="60" y1="60" x2="60" y2="390" stroke="#000" stroke-width="3"/>
+      <polygon points="570,390 555,380 555,400" fill="#000"/>
+      <polygon points="60,60 45,75 75,75" fill="#000"/>
+      <g stroke="#000" stroke-width="1" font-family="Arial" font-size="14" text-anchor="middle">
+        <line x1="120" y1="380" x2="120" y2="400"/><text x="120" y="420">1</text>
+        <line x1="180" y1="380" x2="180" y2="400"/><text x="180" y="422">2</text>
+        <line x1="240" y1="380" x2="240" y2="400"/><text x="240" y="422">3</text>
+        <line x1="300" y1="380" x2="300" y2="400"/><text x="300" y="422">4</text>
+        <line x1="360" y1="380" x2="360" y2="400"/><text x="360" y="422">5</text>
+        <line x1="420" y1="380" x2="420" y2="400"/><text x="420" y="422">6</text>
+        <line x1="480" y1="380" x2="480" y2="400"/><text x="480" y="422">7</text>
+      </g>
+      <g stroke="#000" stroke-width="1" font-family="Arial" font-size="14" text-anchor="end">
+        <line x1="45" y1="330" x2="75" y2="330"/><text x="40" y="337">1</text>
+        <line x1="45" y1="270" x2="75" y2="270"/><text x="40" y="277">2</text>
+        <line x1="45" y1="210" x2="75" y2="210"/><text x="40" y="217">3</text>
+        <line x1="45" y1="150" x2="75" y2="150"/><text x="40" y="157">4</text>
+        <line x1="45" y1="90" x2="75" y2="90"/><text x="40" y="97">5</text>
+      </g>
+      <text x="585" y="410" font-family="Arial" font-size="18" font-weight="bold">X</text>
+      <text x="35" y="45" font-family="Arial" font-size="18" font-weight="bold">Y</text>
+      <text x="35" y="410" font-family="Arial" font-size="14">0</text>
+    </svg>
+    <div class="graph-instruction">위 좌표평면에 실험 결과를 점으로 찍고 선으로 연결하여 그래프를 그려보세요.</div>
+  </div>
+</div>
+`.trim();
+
+    // 전역 정규식 test()는 lastIndex 영향이 있어 재생성
+    const insertRegex = /^##\s*데이터\s*그래프\s*$/im;
+    return markdown.replace(insertRegex, (m) => `${m}\n\n${defaultGraphHtml}\n`);
 }
 
 // Word 파일용 HTML로 변환
